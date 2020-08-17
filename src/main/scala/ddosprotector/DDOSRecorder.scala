@@ -7,6 +7,7 @@ import java.util.concurrent._
 
 class DDOSRecorder() {
 
+  //LRU Cache Implementation to keep track of client IPs
   class LRUCache(var lruCapacity: Int) extends util.LinkedHashMap[String, Integer](lruCapacity, 0.75F, true) {
 
     def get(key: String): Int = super.getOrDefault(key, -1)
@@ -44,6 +45,7 @@ class DDOSRecorder() {
 
   val f = ex.scheduleAtFixedRate(task, 15, 15, TimeUnit.SECONDS)
 
+  //Function that Get request uses to interact with app
   def hit(address: String): Unit = {
     lruCache.put(address)
   }

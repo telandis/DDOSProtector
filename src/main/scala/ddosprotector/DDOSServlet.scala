@@ -18,6 +18,7 @@ class DDOSServlet extends ScalatraServlet {
 
   var ddosRecorder = new DDOSRecorder()
 
+  //Get request for clients to hit
   get("/hit") {
     ddosRecorder.hit(request.getRemoteAddr())
     logger.info(request.getRemoteAddr())
